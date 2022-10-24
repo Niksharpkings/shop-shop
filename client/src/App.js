@@ -15,6 +15,7 @@ import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
+import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from './pages/OrderHistory';
 
 const httpLink = createHttpLink({
@@ -47,15 +48,17 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
+        <StoreProvider>
           <Nav />
           <Routes>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/orderHistory" component={OrderHistory} />
-            <Route exact path="/products/:id" component={Detail} />
-            <Route component={NoMatch} />
-          </Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/orderHistory" element={<OrderHistory />} />
+            <Route exact path="/products/:id" element={<Detail />} />
+            <Route path="*" element={<NoMatch />} />
+            </Routes>
+          </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>
