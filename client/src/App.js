@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Import Apollo Server to connect to front end
 import {
@@ -9,19 +9,20 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-import Home from './pages/Home';
-import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Nav from './components/Nav';
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import NoMatch from "./pages/NoMatch";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Success from "./pages/Success";
+import Nav from "./components/Nav";
 import { StoreProvider } from "./utils/GlobalState";
-import OrderHistory from './pages/OrderHistory';
+import OrderHistory from "./pages/OrderHistory";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
   cache: new InMemoryCache(),
- //! graphql: true
+  //! graphql: true
 });
 console.log("httpLink: ", httpLink);
 
@@ -48,15 +49,16 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-        <StoreProvider>
-          <Nav />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/orderHistory" element={<OrderHistory />} />
-            <Route exact path="/products/:id" element={<Detail />} />
-            <Route path="*" element={<NoMatch />} />
+          <StoreProvider>
+            <Nav />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/signup" element={<Signup />} />
+              <Route exact path="/orderHistory" element={<OrderHistory />} />
+              <Route exact path="/products/:id" element={<Detail />} />
+              <Route exact path="/success" element={<Success />} />
+              <Route path="*" element={<NoMatch />} />
             </Routes>
           </StoreProvider>
         </div>
